@@ -4,7 +4,7 @@ services:
       context: .  # 현재 디렉토리의 Dockerfile을 이용해 애플리케이션 빌드
     container_name: my-java-app
     ports:
-      - "8080:8080"
+      - "8756:8081"
     environment:
       - TZ=Asia/Seoul  # 타임존 설정 (한국 표준시)
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hellocat
@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
     networks:
-      - my-network
+      - host
 
   db:
     image: mysql:latest
@@ -29,10 +29,10 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     networks:
-      - my-network
+      - host
 
 networks:
-  my-network:
+  host:
     driver: bridge
 
 volumes:
