@@ -31,9 +31,9 @@ docker-compose up -d --build || { echo "Failed to build and start containers!"; 
 echo "Checking container status..."
 docker-compose ps || { echo "Failed to check container status!"; exit 1; }
 
-# 7. 로그 출력 (로그 출력은 백그라운드에서 실행)
+# 로그를 파일로 저장
 echo "Tailing logs..."
-docker-compose logs -f &
+docker-compose logs > /BackEnd/docker_logs.txt &
 
 echo "Deployment successful!"
 exit 0
