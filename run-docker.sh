@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 필요한 디렉토리로 이동 (예: /BackEnd 경로)
+cd /BackEnd || exit 1
+
 # 1. 자바 파일 빌드 (Gradle Wrapper 사용)
 echo "Building Java application..."
 ./gradlew build
@@ -20,6 +23,6 @@ docker-compose up -d --build
 echo "Checking container status..."
 docker-compose ps
 
-# 6. 컨테이너 로그 출력
+# 6. 로그 출력 (로그 출력은 백그라운드에서 실행)
 echo "Tailing logs..."
-docker-compose logs -f
+docker-compose logs -f &  # '&'를 붙여서 로그 출력을 백그라운드로 실행
