@@ -16,7 +16,12 @@ docker-compose down || { echo "Failed to stop containers!"; exit 1; }
 
 # 4. 오래된 이미지 삭제 (옵션)
 echo "Removing old images..."
-docker rmi -f $(docker images -q my-java-app) || { echo "Failed to remove old images!"; exit 1; }
+old_images=$(docker images -q my-java-app)
+if [ -n "$old_images" ]; then
+    docker rmi -f $old_images || { echo "Failed to remove old images!"; exit 1; }
+else
+    echo "No old images to remove."
+fi
 
 # 5. 빌드 및 실행
 echo "Building and starting containers..."
