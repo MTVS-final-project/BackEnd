@@ -1,12 +1,11 @@
 package com.ohgiraffers.hellocat.character.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class CharacterUpdateResponseDto {
 
     private Long skin;
@@ -20,4 +19,19 @@ public class CharacterUpdateResponseDto {
     private Long rightLeg;
     private Long leftShoe;
     private Long rightShoe;
+
+    @Builder
+    public CharacterUpdateResponseDto(Long skin, Long hair, Long eye, Long mouth, Long leftArm, Long rightArm, Long pants, Long leftLeg, Long rightLeg, Long leftShoe, Long rightShoe) {
+        this.skin = skin;
+        this.hair = hair;
+        this.eye = eye;
+        this.mouth = mouth;
+        this.leftArm = leftArm;
+        this.rightArm = rightArm;
+        this.pants = pants;
+        this.leftLeg = leftLeg;
+        this.rightLeg = rightLeg;
+        this.leftShoe = leftShoe;
+        this.rightShoe = rightShoe;
+    }
 }
