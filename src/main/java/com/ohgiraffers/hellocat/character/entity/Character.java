@@ -1,6 +1,7 @@
 package com.ohgiraffers.hellocat.character.entity;
 
 import com.ohgiraffers.hellocat.character.dto.CharacterUpdateRequestDto;
+import com.ohgiraffers.hellocat.character.dto.CharacterUpdateResponseDto;
 import com.ohgiraffers.hellocat.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -34,7 +35,7 @@ public class Character {
         this.user = user;
     }
 
-    public void update(CharacterUpdateRequestDto requestDto) {
+    public CharacterUpdateResponseDto update(CharacterUpdateRequestDto requestDto) {
         this.skin = requestDto.getSkin();
         this.hair = requestDto.getHair();
         this.eye = requestDto.getEye();
@@ -46,5 +47,13 @@ public class Character {
         this.rightLeg = requestDto.getRightLeg();
         this.leftShoe = requestDto.getLeftShoe();
         this.rightShoe = requestDto.getRightShoe();
+
+        // 업데이트된 값을 CharacterUpdateResponseDto에 담아서 리턴
+        return new CharacterUpdateResponseDto(
+                this.skin, this.hair, this.eye, this.mouth,
+                this.leftArm, this.rightArm, this.pants,
+                this.leftLeg, this.rightLeg, this.leftShoe, this.rightShoe
+        );
     }
+
 }
