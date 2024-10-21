@@ -20,6 +20,20 @@ public class CharacterService {
         Character foundCharacter = characterRepository.findByUserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
-        return foundCharacter.update(requestDto);
+        foundCharacter.update(requestDto);
+
+        return CharacterUpdateResponseDto.builder()
+                .skin(foundCharacter.getSkin())
+                .hair(foundCharacter.getHair())
+                .eye(foundCharacter.getEye())
+                .mouth(foundCharacter.getMouth())
+                .leftArm(foundCharacter.getLeftArm())
+                .rightArm(foundCharacter.getRightArm())
+                .pants(foundCharacter.getPants())
+                .leftLeg(foundCharacter.getLeftLeg())
+                .rightLeg(foundCharacter.getRightLeg())
+                .leftShoe(foundCharacter.getLeftShoe())
+                .rightShoe(foundCharacter.getRightShoe())
+                .build();
     }
 }
