@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Table(name = "user_character")
 public class Character {
 
     @Id
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Long skin;
     private Long hair;
@@ -30,10 +29,6 @@ public class Character {
     private Long rightLeg;
     private Long leftShoe;
     private Long rightShoe;
-
-    public Character(User user) {
-        this.user = user;
-    }
 
     public void update(CharacterUpdateRequestDto requestDto) {
         this.skin = requestDto.getSkin();
@@ -48,5 +43,4 @@ public class Character {
         this.leftShoe = requestDto.getLeftShoe();
         this.rightShoe = requestDto.getRightShoe();
     }
-
 }
