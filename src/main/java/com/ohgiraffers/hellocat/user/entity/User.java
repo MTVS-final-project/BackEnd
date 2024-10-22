@@ -21,4 +21,8 @@ public class User {
     @OneToOne
     @JoinColumn(name = "user_character_id")
     private Character character;
+
+    public void makeCharacter(Character character) {
+        this.character = character;
+    }
 }
