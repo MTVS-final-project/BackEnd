@@ -11,16 +11,14 @@ import static jakarta.persistence.FetchType.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @OneToOne(mappedBy = "user", cascade = ALL, fetch = LAZY)
-    private Character character;
 
-    public void createCharacter() {
-        this.character = new Character(this);
-    }
+    @OneToOne
+    @JoinColumn(name = "user_character_id")
+    private Character character;
 }
