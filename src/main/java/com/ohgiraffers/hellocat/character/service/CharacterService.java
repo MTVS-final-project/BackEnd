@@ -15,10 +15,10 @@ public class CharacterService {
 
     private final CharacterRepository characterRepository;
 
-    public CharacterUpdateResponseDto update(Long userId, CharacterUpdateRequestDto requestDto) {
+    public CharacterUpdateResponseDto update(Long characterId, CharacterUpdateRequestDto requestDto) {
 
-        Character foundCharacter = characterRepository.findByUserId(userId)
-                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+        Character foundCharacter = characterRepository.findById(characterId)
+                .orElseThrow(() -> new IllegalArgumentException("캐릭터를 찾을 수 없습니다."));
 
         foundCharacter.update(requestDto);
 

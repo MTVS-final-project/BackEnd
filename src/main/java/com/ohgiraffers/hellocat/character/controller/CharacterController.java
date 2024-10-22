@@ -2,22 +2,25 @@ package com.ohgiraffers.hellocat.character.controller;
 
 import com.ohgiraffers.hellocat.character.dto.CharacterUpdateRequestDto;
 import com.ohgiraffers.hellocat.character.dto.CharacterUpdateResponseDto;
-import com.ohgiraffers.hellocat.character.entity.Character;
 import com.ohgiraffers.hellocat.character.service.CharacterService;
+import com.ohgiraffers.hellocat.user.sevice.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "캐릭터 API", description = "유저의 캐릭터 관련 API")
 @RestController
 @RequestMapping("/api/character")
 @RequiredArgsConstructor
 public class CharacterController {
 
     private final CharacterService characterService;
+    private final UserService userService;
 
     @PostMapping("/{userId}")
     @Operation(summary = "유저 캐릭터 업데이트", description = "유저의 캐릭터 커스터마이징을 업데이트 합니다.")
@@ -28,7 +31,9 @@ public class CharacterController {
     public ResponseEntity<CharacterUpdateResponseDto> updateCharacter(@PathVariable Long userId,
                                                      @RequestBody CharacterUpdateRequestDto requestDto) {
 
-        CharacterUpdateResponseDto updatedCharacter = characterService.update(userId, requestDto);
+        Long characterId = userService.findById(userId).getCharacter().getId();
+
+        CharacterUpdateResponseDto updatedCharacter = characterService.update(characterId, requestDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedCharacter);
     }
