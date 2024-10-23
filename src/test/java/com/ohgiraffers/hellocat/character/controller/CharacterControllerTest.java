@@ -13,7 +13,7 @@ import com.ohgiraffers.hellocat.character.entity.Character;
 import com.ohgiraffers.hellocat.character.service.CharacterService;
 import com.ohgiraffers.hellocat.user.dto.UserFindResponseDto;
 import com.ohgiraffers.hellocat.user.entity.User;
-import com.ohgiraffers.hellocat.user.sevice.UserService;
+import com.ohgiraffers.hellocat.user.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
