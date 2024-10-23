@@ -1,4 +1,4 @@
-package com.ohgiraffers.hellocat.user.sevice;
+package com.ohgiraffers.hellocat.user.service;
 
 import com.ohgiraffers.hellocat.user.dto.UserFindResponseDto;
 import com.ohgiraffers.hellocat.user.entity.User;
