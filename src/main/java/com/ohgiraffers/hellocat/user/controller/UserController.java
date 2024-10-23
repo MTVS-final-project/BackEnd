@@ -35,7 +35,7 @@ public class UserController {
 
         Character character = new Character();
         characterService.createCharacter(character);
-        
+
         user.makeCharacter(character);
 
         UserCreateResponseDto responseDto = userService.createUser(user);
