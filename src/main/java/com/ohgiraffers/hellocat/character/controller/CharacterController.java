@@ -3,7 +3,7 @@ package com.ohgiraffers.hellocat.character.controller;
 import com.ohgiraffers.hellocat.character.dto.CharacterUpdateRequestDto;
 import com.ohgiraffers.hellocat.character.dto.CharacterUpdateResponseDto;
 import com.ohgiraffers.hellocat.character.service.CharacterService;
-import com.ohgiraffers.hellocat.user.sevice.UserService;
+import com.ohgiraffers.hellocat.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

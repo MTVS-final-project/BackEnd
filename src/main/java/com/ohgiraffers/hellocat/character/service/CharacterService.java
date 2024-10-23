@@ -15,6 +15,10 @@ public class CharacterService {
 
     private final CharacterRepository characterRepository;
 
+    public Long createCharacter(Character character) {
+        return characterRepository.save(character).getId();
+    }
+
     public CharacterUpdateResponseDto update(Long characterId, CharacterUpdateRequestDto requestDto) {
 
         Character foundCharacter = characterRepository.findById(characterId)

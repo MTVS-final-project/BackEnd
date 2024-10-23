@@ -1,5 +1,6 @@
-package com.ohgiraffers.hellocat.user.sevice;
+package com.ohgiraffers.hellocat.user.service;
 
+import com.ohgiraffers.hellocat.user.dto.UserCreateResponseDto;
 import com.ohgiraffers.hellocat.user.dto.UserFindResponseDto;
 import com.ohgiraffers.hellocat.user.entity.User;
 import com.ohgiraffers.hellocat.user.repository.UserRepository;
@@ -22,6 +23,16 @@ public class UserService {
         return UserFindResponseDto.builder()
                 .id(foundUser.getId())
                 .character(foundUser.getCharacter())
+                .build();
+    }
+
+    public UserCreateResponseDto createUser(User user) {
+
+        userRepository.save(user);
+
+        return UserCreateResponseDto.builder()
+                .id(user.getId())
+                .character(user.getCharacter())
                 .build();
     }
 }
