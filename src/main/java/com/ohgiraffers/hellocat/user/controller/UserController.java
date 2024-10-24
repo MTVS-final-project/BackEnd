@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "유저 API", description = "유저 관련 API")
 @Slf4j
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
-@Tag(name = "유저 API", description = "유저 관련 API")
 public class UserController {
 
     private final UserService userService;
