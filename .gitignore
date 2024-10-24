@@ -39,3 +39,4 @@ out/
 ### 프로젝트 설정 ###
 application.yml
 .env
+**/*.log
