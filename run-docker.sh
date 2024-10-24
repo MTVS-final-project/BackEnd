@@ -7,8 +7,8 @@ cd /BackEnd || { echo "Directory /BackEnd not found!"; exit 1; }
 chmod +x ./gradlew || { echo "Failed to give execute permission to gradlew!"; exit 1; }
 
 # 2. 자바 파일 빌드 (Gradle Wrapper 사용)
-echo "Cleaning and building Java application..."
-./gradlew clean build || { echo "Java clean build failed!"; exit 1; }
+echo "Building Java application..."
+./gradlew build || { echo "Java build failed!"; exit 1; }
 
 # 3. 기존 컨테이너 및 네트워크 종료 및 정리
 echo "Stopping and removing existing containers..."
@@ -31,9 +31,6 @@ docker-compose up -d --build || { echo "Failed to build and start containers!"; 
 echo "Checking container status..."
 docker-compose ps || { echo "Failed to check container status!"; exit 1; }
 
-# 로그를 파일로 저장
-echo "Tailing logs..."
-docker-compose logs > /BackEnd/docker_logs.txt &
-
+# 로그 출력을 생략하여 Jenkins가 끝날 수 있게 함
 echo "Deployment successful!"
 exit 0
