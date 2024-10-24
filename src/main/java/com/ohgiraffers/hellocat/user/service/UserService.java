@@ -4,10 +4,12 @@ import com.ohgiraffers.hellocat.user.dto.UserCreateResponseDto;
 import com.ohgiraffers.hellocat.user.dto.UserFindResponseDto;
 import com.ohgiraffers.hellocat.user.entity.User;
 import com.ohgiraffers.hellocat.user.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
