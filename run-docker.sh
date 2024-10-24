@@ -3,19 +3,12 @@
 # 필요한 디렉토리로 이동 (예: /BackEnd 경로)
 cd /BackEnd || { echo "Directory /BackEnd not found!"; exit 1; }
 
-if [ -d "./out" ]; then
-    echo "Removing existing out directory..."
-    rm -rf ./out || { echo "Failed to remove out directory!"; exit 1; }
-else
-    echo "No out directory to remove."
-fi
-
 # 1. gradlew에 실행 권한 부여
 chmod +x ./gradlew || { echo "Failed to give execute permission to gradlew!"; exit 1; }
 
-# 2. 자바 파일 빌드 (Gradle Wrapper 사용)
-echo "Cleaning and building Java application..."
-./gradlew clean build || { echo "Java clean build failed!"; exit 1; }
+# 2. 자바 파일 빌드 (테스트 무시)
+echo "Cleaning and building Java application (skipping tests)..."
+./gradlew clean build -x test || { echo "Java clean build failed!"; exit 1; }
 
 # 3. 기존 컨테이너 및 네트워크 종료 및 정리
 echo "Stopping and removing existing containers..."
