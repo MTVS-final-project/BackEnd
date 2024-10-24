@@ -10,11 +10,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
@@ -39,6 +41,8 @@ public class UserController {
         user.makeCharacter(character);
 
         UserCreateResponseDto responseDto = userService.createUser(user);
+
+        log.info("[UserController] 유저 생성 성공: userId={}", responseDto.getId());
 
         return ResponseEntity.status(201).body(responseDto);
     }
