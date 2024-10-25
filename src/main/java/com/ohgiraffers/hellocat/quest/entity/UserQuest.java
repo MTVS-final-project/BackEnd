@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.quest.entity;
 
+import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +33,7 @@ public class UserQuest {
     // Todo: 해시맵으로 교체 예정
     private Long reward;
 
+    // Todo: 수행중인 상태도 표시 해야하나?
     @NotNull(message = "퀘스트 수행 여부는 필수입니다.")
-    private Boolean complete;
+    private QuestStatus questStatus;
 }
