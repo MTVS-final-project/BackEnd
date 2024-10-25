@@ -1,11 +1,14 @@
 package com.ohgiraffers.hellocat.quest.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Map;
+
 
 @Entity
 @Getter
@@ -15,4 +18,20 @@ public class UserQuest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "생성 유저 ID는 필수입니다.")
+    private Long userId;
+
+    @NotBlank(message = "퀘스트 제목은 필수입니다.")
+    private String title;
+
+    @NotBlank(message = "퀘스트 내용은 필수입니다.")
+    private String description;
+
+    @NotNull(message = "보상 아이템은 필수입니다.")
+    // Todo: 해시맵으로 교체 예정
+    private Long reward;
+
+    @NotNull(message = "퀘스트 수행 여부는 필수입니다.")
+    private Boolean complete;
 }
