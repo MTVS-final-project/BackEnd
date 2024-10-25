@@ -23,10 +23,6 @@ public class UserQuestService {
 
         List<UserQuest> questList = userQuestRepository.findAll();
 
-        if (questList.) {
-
-        }
-
         return  questList
                 .stream()
                 .map(UserQuestResponseDto::new)
