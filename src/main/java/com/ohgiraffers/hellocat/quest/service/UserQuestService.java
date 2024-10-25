@@ -28,4 +28,14 @@ public class UserQuestService {
                 .map(UserQuestResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public List<UserQuestResponseDto> findUserQuestByUserId(Long userId) {
+
+        List<UserQuest> questList = userQuestRepository.findAllByUserId(userId);
+
+        return  questList
+                .stream()
+                .map(UserQuestResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
