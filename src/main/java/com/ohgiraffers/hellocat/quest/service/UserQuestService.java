@@ -23,6 +23,7 @@ public class UserQuestService {
 
     private final UserQuestRepository userQuestRepository;
 
+    @Transactional(readOnly = true)
     public List<UserQuestResponseDto> findUserQuestList() {
 
         List<UserQuest> questList = userQuestRepository.findAll();
@@ -33,6 +34,7 @@ public class UserQuestService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<UserQuestResponseDto> findUserQuestByUserId(Long userId) {
 
         List<UserQuest> questList = userQuestRepository.findAllByUserId(userId);
