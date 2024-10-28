@@ -7,10 +7,8 @@ import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import com.ohgiraffers.hellocat.quest.repository.UserQuestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,5 +76,4 @@ public class UserQuestService {
 
         return new UserQuestResponseDto(updatedQuest);
     }
-
 }
