@@ -63,14 +63,18 @@ public class UserQuestService {
     public UserQuestResponseDto updateUserQuest(Long questId, Long userId, UserQuestRequestDto requestDto) {
 
         UserQuest userQuest = userQuestRepository.findById(questId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("퀘스트를 찾을 수 없습니다."));
+                .orElseThrow(() -> {
+                    log.error("퀘스트를 찾을 수 없습니다. questId: {}", questId);
+                    return new IllegalArgumentException("퀘스트를 찾을 수 없습니다.");
+                });
 
         if (!userQuest.getUserId().equals(userId)) {
+            log.warn("권한이 없는 사용자가 수정 시도: userId: {}, questId: {}", userId, questId);
             throw new SecurityException("해당 퀘스트를 수정할 권한이 없습니다.");
         }
 
         if (userQuest.getQuestStatus().equals(진행중) || userQuest.getQuestStatus().equals(완료)) {
+            log.warn("수정 불가능한 상태의 퀘스트 수정 시도: questId: {}, status: {}", questId, userQuest.getQuestStatus());
             throw new IllegalStateException("진행중이거나 완료된 퀘스트는 수정이 불가능합니다.");
         }
 
@@ -82,14 +86,18 @@ public class UserQuestService {
     public void deleteUserQuest(Long questId, Long userId) {
 
         UserQuest foundQuest = userQuestRepository.findById(questId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("퀘스트를 찾을 수 없습니다."));
+                .orElseThrow(() -> {
+                    log.error("퀘스트를 찾을 수 없습니다. questId: {}", questId);
+                    return new IllegalArgumentException("퀘스트를 찾을 수 없습니다.");
+                });
 
         if (!foundQuest.getUserId().equals(userId)) {
+            log.warn("권한이 없는 사용자가 삭제 시도: userId: {}, questId: {}", userId, questId);
             throw new SecurityException("해당 퀘스트를 삭제할 권한이 없습니다.");
         }
 
         if (foundQuest.getQuestStatus().equals(진행중) || foundQuest.getQuestStatus().equals(완료)) {
+            log.warn("삭제 불가능한 상태의 퀘스트 삭제 시도: questId: {}, status: {}", questId, foundQuest.getQuestStatus());
             throw new IllegalStateException("진행중이거나 완료된 퀘스트는 삭제가 불가능합니다.");
         }
 
