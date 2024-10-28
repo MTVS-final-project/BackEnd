@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.quest.service;
 
+import com.ohgiraffers.hellocat.quest.dto.UserQuestRequestDto;
 import com.ohgiraffers.hellocat.quest.dto.UserQuestResponseDto;
 import com.ohgiraffers.hellocat.quest.entity.UserQuest;
 import com.ohgiraffers.hellocat.quest.repository.UserQuestRepository;
@@ -37,5 +38,20 @@ public class UserQuestService {
                 .stream()
                 .map(UserQuestResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public UserQuestResponseDto createUserQuest(UserQuestRequestDto requestDto) {
+
+        UserQuest userQuest = UserQuest.builder()
+                .userId(requestDto.getUserId())
+                .title(requestDto.getTitle())
+                .description(requestDto.getDescription())
+                .reward(requestDto.getReward())
+                .questStatus(requestDto.getQuestStatus())
+                .build();
+
+        UserQuest savedQuest = userQuestRepository.save(userQuest);
+
+        return new UserQuestResponseDto(savedQuest);
     }
 }
