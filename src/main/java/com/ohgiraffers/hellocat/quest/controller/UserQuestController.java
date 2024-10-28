@@ -43,7 +43,6 @@ public class UserQuestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "유저 퀘스트 조회 성공, 퀘스트가 없는 경우 빈 리스트 반환"),
             @ApiResponse(responseCode = "404", description = "유저를 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<List<UserQuestResponseDto>> findUserQuestByUserId(@PathVariable Long userId) {
 
@@ -56,7 +55,6 @@ public class UserQuestController {
     @Operation(summary = "유저 퀘스트 생성", description = "유저가 퀘스트를 생성합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "퀘스트가 정상 조회되었습니다."),
-            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<UserQuestResponseDto> createUserQuest(@RequestBody UserQuestRequestDto requestDto) {
 
@@ -71,7 +69,6 @@ public class UserQuestController {
             @ApiResponse(responseCode = "200", description = "퀘스트가 정상 수정되었습니다."),
             @ApiResponse(responseCode = "403", description = "수정 권한이 없습니다."),
             @ApiResponse(responseCode = "404", description = "퀘스트를 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<UserQuestResponseDto> updateUserQuest(
             @PathVariable Long questId,
@@ -87,6 +84,8 @@ public class UserQuestController {
             return ResponseEntity.status(NOT_FOUND).build();
         }
     }
+    
+    // Todo: 유저 ID RequestHeader 고려
 
     @DeleteMapping("/{questId}")
     @Operation(summary = "유저 퀘스트 삭제", description = "유저가 퀘스트를 삭제합니다.")
@@ -94,15 +93,14 @@ public class UserQuestController {
             @ApiResponse(responseCode = "200", description = "퀘스트가 정상적으로 삭제되었습니다."),
             @ApiResponse(responseCode = "403", description = "퀘스트의 상태로 인해 삭제할 수 없습니다."),
             @ApiResponse(responseCode = "404", description = "퀘스트를 찾을 수 없습니다."),
-            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public ResponseEntity<Long> deleteUserQuest(
+    public ResponseEntity<?> deleteUserQuest(
             @PathVariable Long questId,
             @RequestParam Long userId) {
 
         try {
-            Long deletedQuest = userQuestService.deleteUserQuest(questId, userId);
-            return ResponseEntity.status(OK).body(deletedQuest);
+            userQuestService.deleteUserQuest(questId, userId);
+            return ResponseEntity.status(NO_CONTENT).build();
         } catch (SecurityException | IllegalStateException e) {
             return ResponseEntity.status(FORBIDDEN).build();
         } catch (IllegalArgumentException e) {

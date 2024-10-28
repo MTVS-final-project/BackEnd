@@ -77,7 +77,7 @@ public class UserQuestService {
         return new UserQuestResponseDto(updatedQuest);
     }
 
-    public Long deleteUserQuest(Long questId, Long userId) {
+    public void deleteUserQuest(Long questId, Long userId) {
 
         UserQuest foundQuest = userQuestRepository.findById(questId)
                 .orElseThrow(() ->
@@ -92,7 +92,5 @@ public class UserQuestService {
         }
 
         userQuestRepository.delete(foundQuest);
-
-        return foundQuest.getId();
     }
 }
