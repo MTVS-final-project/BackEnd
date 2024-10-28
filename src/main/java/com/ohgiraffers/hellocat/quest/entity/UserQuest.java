@@ -4,6 +4,7 @@ import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,4 +37,13 @@ public class UserQuest {
     // Todo: 수행중인 상태도 표시 해야하나?
     @NotNull(message = "퀘스트 수행 여부는 필수입니다.")
     private QuestStatus questStatus;
+
+    @Builder
+    public UserQuest(Long userId, String title, String description, Long reward, QuestStatus questStatus) {
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.reward = reward;
+        this.questStatus = questStatus;
+    }
 }
