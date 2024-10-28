@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.quest.entity;
 
+import com.ohgiraffers.hellocat.quest.dto.UserQuestRequestDto;
 import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -45,5 +46,13 @@ public class UserQuest {
         this.description = description;
         this.reward = reward;
         this.questStatus = questStatus;
+    }
+
+    public UserQuest update(UserQuestRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.description = requestDto.getDescription();
+        this.reward = requestDto.getReward();
+        this.questStatus = requestDto.getQuestStatus();
+        return this;
     }
 }

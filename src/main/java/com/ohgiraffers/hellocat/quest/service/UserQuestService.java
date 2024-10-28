@@ -3,6 +3,7 @@ package com.ohgiraffers.hellocat.quest.service;
 import com.ohgiraffers.hellocat.quest.dto.UserQuestRequestDto;
 import com.ohgiraffers.hellocat.quest.dto.UserQuestResponseDto;
 import com.ohgiraffers.hellocat.quest.entity.UserQuest;
+import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import com.ohgiraffers.hellocat.quest.repository.UserQuestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.ohgiraffers.hellocat.quest.enums.QuestStatus.*;
 
 @Slf4j
 @Service
@@ -53,5 +56,24 @@ public class UserQuestService {
         UserQuest savedQuest = userQuestRepository.save(userQuest);
 
         return new UserQuestResponseDto(savedQuest);
+    }
+
+    public UserQuestResponseDto updateUserQuest(Long questId, Long userId, UserQuestRequestDto requestDto) {
+
+        UserQuest userQuest = userQuestRepository.findById(questId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("퀘스트를 찾을 수 없습니다."));
+
+        if (!userQuest.getUserId().equals(userId)) {
+            throw new SecurityException("해당 퀘스트를 수정할 권한이 없습니다.");
+        }
+
+        if (userQuest.getQuestStatus().equals(진행중) || userQuest.getQuestStatus().equals(완료)) {
+            throw new IllegalStateException("진행중이거나 완료된 퀘스트는 수정이 불가능합니다.");
+        }
+
+        UserQuest updatedQuest = userQuest.update(requestDto);
+
+        return new UserQuestResponseDto(updatedQuest);
     }
 }

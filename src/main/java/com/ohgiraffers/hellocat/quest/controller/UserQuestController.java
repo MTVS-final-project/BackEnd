@@ -9,11 +9,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.*;
 
 @Tag(name = "유저 퀘스트 API", description = "유저 퀘스트 관련 API")
 @Slf4j
@@ -34,7 +35,7 @@ public class UserQuestController {
 
         List<UserQuestResponseDto> responseDtoList = userQuestService.findUserQuestList();
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseDtoList);
+        return ResponseEntity.status(OK).body(responseDtoList);
     }
 
     @GetMapping("/{userId}")
@@ -48,19 +49,44 @@ public class UserQuestController {
 
         List<UserQuestResponseDto> responseDtoList = userQuestService.findUserQuestByUserId(userId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseDtoList);
+        return ResponseEntity.status(OK).body(responseDtoList);
     }
 
     @PostMapping
     @Operation(summary = "유저 퀘스트 생성", description = "유저가 퀘스트를 생성합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "퀘스트가 정상 조회되었습니다.")
+            @ApiResponse(responseCode = "201", description = "퀘스트가 정상 조회되었습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<UserQuestResponseDto> createUserQuest(@RequestBody UserQuestRequestDto requestDto) {
 
         UserQuestResponseDto savedQuest = userQuestService.createUserQuest(requestDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedQuest);
+        return ResponseEntity.status(CREATED).body(savedQuest);
     }
+
+    @PutMapping("/{questId}")
+    @Operation(summary = "유저 퀘스트 수정", description = "유저가 퀘스트를 수정합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "퀘스트가 정상 수정되었습니다."),
+            @ApiResponse(responseCode = "403", description = "수정 권한이 없습니다."),
+            @ApiResponse(responseCode = "404", description = "퀘스트를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+    public ResponseEntity<UserQuestResponseDto> updateUserQuest(
+            @PathVariable Long questId,
+            @RequestBody UserQuestRequestDto requestDto,
+            @RequestParam Long userId) {
+
+        try {
+            UserQuestResponseDto updatedQuest = userQuestService.updateUserQuest(questId, userId, requestDto);
+            return ResponseEntity.status(OK).body(updatedQuest);
+        } catch (SecurityException | IllegalStateException e) {
+            return ResponseEntity.status(FORBIDDEN).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
+    }
+
 }
 
