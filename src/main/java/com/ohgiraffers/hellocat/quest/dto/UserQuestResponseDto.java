@@ -1,6 +1,7 @@
 package com.ohgiraffers.hellocat.quest.dto;
 
 import com.ohgiraffers.hellocat.quest.entity.UserQuest;
+import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,15 +13,15 @@ public class UserQuestResponseDto {
     private String title;
     private String description;
     private Long reward;
-    private Boolean complete;
+    private QuestStatus questStatus;
 
     @Builder
     public UserQuestResponseDto(UserQuest userQuest) {
-        this.id = userQuest.getUserId();
+        this.id = userQuest.getId();
         this.userId = userQuest.getUserId();
         this.title = userQuest.getTitle();
         this.description = userQuest.getDescription();
         this.reward = userQuest.getReward();
-        this.complete = userQuest.getComplete();
+        this.questStatus = userQuest.getQuestStatus();
     }
 }
