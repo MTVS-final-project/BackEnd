@@ -76,4 +76,23 @@ public class UserQuestService {
 
         return new UserQuestResponseDto(updatedQuest);
     }
+
+    public Long deleteUserQuest(Long questId, Long userId) {
+
+        UserQuest foundQuest = userQuestRepository.findById(questId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("퀘스트를 찾을 수 없습니다."));
+
+        if (!foundQuest.getUserId().equals(userId)) {
+            throw new SecurityException("해당 퀘스트를 삭제할 권한이 없습니다.");
+        }
+
+        if (foundQuest.getQuestStatus().equals(진행중) || foundQuest.getQuestStatus().equals(완료)) {
+            throw new IllegalStateException("진행중이거나 완료된 퀘스트는 삭제가 불가능합니다.");
+        }
+
+        userQuestRepository.delete(foundQuest);
+
+        return foundQuest.getId();
+    }
 }
