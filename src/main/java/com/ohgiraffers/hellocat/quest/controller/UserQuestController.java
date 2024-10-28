@@ -88,5 +88,27 @@ public class UserQuestController {
         }
     }
 
+    @DeleteMapping("/{questId}")
+    @Operation(summary = "유저 퀘스트 삭제", description = "유저가 퀘스트를 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "퀘스트가 정상적으로 삭제되었습니다."),
+            @ApiResponse(responseCode = "403", description = "퀘스트의 상태로 인해 삭제할 수 없습니다."),
+            @ApiResponse(responseCode = "404", description = "퀘스트를 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+    public ResponseEntity<Void> deleteUserQuest(
+            @PathVariable Long questId,
+            @RequestParam Long userId) {
+
+        try {
+            userQuestService.deleteUserQuest(questId, userId);
+            return ResponseEntity.status(OK).build();
+        } catch (SecurityException | IllegalStateException e) {
+            return ResponseEntity.status(FORBIDDEN).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
+    }
+
 }
 
