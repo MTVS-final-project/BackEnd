@@ -1,6 +1,8 @@
 package com.ohgiraffers.hellocat.market.service;
 
+import com.ohgiraffers.hellocat.market.dto.MarketItemRequestDto;
 import com.ohgiraffers.hellocat.market.dto.MarketItemResponseDto;
+import com.ohgiraffers.hellocat.market.entity.MarketItem;
 import com.ohgiraffers.hellocat.market.repository.MarketItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,5 +27,14 @@ public class MarketItemService {
                 .stream()
                 .map(MarketItemResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public MarketItemResponseDto createMarketItem(MarketItemRequestDto requestDto) {
+
+        MarketItem marketItem = new MarketItem(requestDto);
+
+        MarketItem savedItem = marketItemRepository.save(marketItem);
+
+        return new MarketItemResponseDto(savedItem);
     }
 }
