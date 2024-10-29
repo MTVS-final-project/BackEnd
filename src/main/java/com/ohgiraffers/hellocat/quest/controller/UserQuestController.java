@@ -54,7 +54,7 @@ public class UserQuestController {
     @PostMapping
     @Operation(summary = "유저 퀘스트 생성", description = "유저가 퀘스트를 생성합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "퀘스트가 정상 조회되었습니다."),
+            @ApiResponse(responseCode = "201", description = "퀘스트가 정상 생성되었습니다."),
     })
     public ResponseEntity<UserQuestResponseDto> createUserQuest(@RequestBody UserQuestRequestDto requestDto) {
 
