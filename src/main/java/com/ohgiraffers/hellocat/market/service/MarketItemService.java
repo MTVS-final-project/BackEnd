@@ -50,4 +50,15 @@ public class MarketItemService {
 
         return new MarketItemResponseDto(updatedItem);
     }
+
+    public void deleteMarketItem(Long itemId) {
+
+        MarketItem foundItem = marketItemRepository.findById(itemId)
+                .orElseThrow(() -> {
+                    log.error("아이템을 찾을 수 없습니다. itemId={}", itemId);
+                    return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
+                });
+
+        marketItemRepository.delete(foundItem);
+    }
 }

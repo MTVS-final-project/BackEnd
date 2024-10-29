@@ -38,7 +38,7 @@ public class MarketItemAdminController {
     @PutMapping("/{itemId}")
     @Operation(summary = "마켓 아이템 수정", description = "마켓 아이템을 수정합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "아이템이 정상 수정되었습니다.")
+            @ApiResponse(responseCode = "200", description = "아이템이 정상 수정되었습니다."),
             @ApiResponse(responseCode = "404", description = "아이템을 찾을 수 없습니다.")
     })
     public ResponseEntity<MarketItemResponseDto> updateMarketItem(
@@ -48,6 +48,22 @@ public class MarketItemAdminController {
         try {
             MarketItemResponseDto updatedMarketItem = marketItemService.updateMarketItem(itemId, requestDto);
             return ResponseEntity.status(OK).body(updatedMarketItem);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
+    }
+
+    @DeleteMapping("/{itemId}")
+    @Operation(summary = "마켓 아이템 삭제", description = "마켓 아이템을 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "아이템이 정상 삭제되었습니다."),
+            @ApiResponse(responseCode = "404", description = "아이템을 찾을 수 없습니다.")
+    })
+    public ResponseEntity<Void> deleteMarketItem(@PathVariable Long itemId) {
+
+        try {
+            marketItemService.deleteMarketItem(itemId);
+            return ResponseEntity.status(NO_CONTENT).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
         }
