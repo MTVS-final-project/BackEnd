@@ -40,4 +40,13 @@ public class MarketItem {
         this.price = requestDto.getPrice();
         this.category = requestDto.getCategory();
     }
+
+    public MarketItem update(MarketItemRequestDto requestDto) {
+        this.name = requestDto.getName();
+        this.description = requestDto.getDescription();
+        this.price = requestDto.getPrice();
+        this.category = requestDto.getCategory();
+
+        return this;
+    }
 }

@@ -37,4 +37,17 @@ public class MarketItemService {
 
         return new MarketItemResponseDto(savedItem);
     }
+
+    public MarketItemResponseDto updateMarketItem(Long itemId, MarketItemRequestDto requestDto) {
+
+        MarketItem foundItem = marketItemRepository.findById(itemId)
+                .orElseThrow(() -> {
+                    log.error("아이템을 찾을 수 없습니다. itemId={}", itemId);
+                    return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
+                });
+
+        MarketItem updatedItem = foundItem.update(requestDto);
+
+        return new MarketItemResponseDto(updatedItem);
+    }
 }
