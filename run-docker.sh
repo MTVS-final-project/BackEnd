@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 필요한 디렉토리로 이동 (예: /BackEnd 경로)
-cd hellocat || { echo "Directory hellocat not found!"; exit 1; }
+#cd hellocat || { echo "Directory hellocat not found!"; exit 1; }
 
 # 1. gradlew에 실행 권한 부여
 chmod +x ./gradlew || { echo "Failed to give execute permission to gradlew!"; exit 1; }
@@ -16,7 +16,7 @@ docker-compose down || { echo "Failed to stop containers!"; exit 1; }
 
 # 4. 오래된 이미지 삭제 (옵션)
 echo "Removing old images..."
-old_images=$(docker images -q my-java-app)  # 실제 이미지 이름으로 변경 필요
+old_images=$(docker images -q hellocat)
 if [ -n "$old_images" ]; then
     docker rmi -f $old_images || { echo "Failed to remove old images!"; exit 1; }
 else
