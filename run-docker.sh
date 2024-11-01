@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 필요한 디렉토리로 이동 (예: /BackEnd 경로)
-cd /BackEnd || { echo "Directory /BackEnd not found!"; exit 1; }
+## 필요한 디렉토리로 이동 (예: /BackEnd 경로)
+#cd /BackEnd || { echo "Directory /BackEnd not found!"; exit 1; }
 
 # 1. gradlew에 실행 권한 부여
 chmod +x ./gradlew || { echo "Failed to give execute permission to gradlew!"; exit 1; }
