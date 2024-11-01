@@ -54,7 +54,7 @@ public class UserQuestController {
     @PostMapping
     @Operation(summary = "유저 퀘스트 생성", description = "유저가 퀘스트를 생성합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "퀘스트가 정상 조회되었습니다."),
+            @ApiResponse(responseCode = "201", description = "퀘스트가 정상 생성되었습니다."),
     })
     public ResponseEntity<UserQuestResponseDto> createUserQuest(@RequestBody UserQuestRequestDto requestDto) {
 
@@ -90,7 +90,7 @@ public class UserQuestController {
     @DeleteMapping("/{questId}")
     @Operation(summary = "유저 퀘스트 삭제", description = "유저가 퀘스트를 삭제합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "퀘스트가 정상적으로 삭제되었습니다."),
+            @ApiResponse(responseCode = "204", description = "퀘스트가 정상적으로 삭제되었습니다."),
             @ApiResponse(responseCode = "403", description = "퀘스트의 상태로 인해 삭제할 수 없습니다."),
             @ApiResponse(responseCode = "404", description = "퀘스트를 찾을 수 없습니다."),
     })
