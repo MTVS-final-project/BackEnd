@@ -28,10 +28,10 @@ public class MarketItemResponseDto {
 
     @Builder
     public MarketItemResponseDto(MarketItem marketItem) {
-        this.id = marketItem;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.category = category;
+        this.id = marketItem.getId();
+        this.name = marketItem.getName();
+        this.description = marketItem.getDescription();
+        this.price = marketItem.getPrice();
+        this.category = marketItem.getCategory();
     }
 }
