@@ -13,7 +13,7 @@ docker-compose down || { echo "Failed to stop containers!"; exit 1; }
 
 # 4. 오래된 이미지 삭제 (옵션)
 echo "Removing old images..."
-old_images=$(docker images -q hellocat)  # 실제 이미지 이름으로 변경 필요
+old_images=$(docker images -q hellocat)
 if [ -n "$old_images" ]; then
     docker rmi -f $old_images || { echo "Failed to remove old images!"; exit 1; }
 else
