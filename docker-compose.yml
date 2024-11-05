@@ -1,40 +1,12 @@
 services:
   app:
     build:
-      context: .  # 현재 디렉토리의 Dockerfile을 이용해 애플리케이션 빌드
+      context: .
     container_name: hellocat
     ports:
       - "8080:8080"
     environment:
-      - TZ=Asia/Seoul  # 타임존 설정 (한국 표준시)
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/hellocat
-      - SPRING_DATASOURCE_USERNAME=myuser
-      - SPRING_DATASOURCE_PASSWORD=mypassword
-    depends_on:
-      - db
-    networks:
-      - host
-
-  db:
-    image: mysql:latest
-    container_name: my-mysql-db
-    ports:
-      - "3307:3306"
-    environment:
-      - TZ=Asia/Seoul  # 타임존 설정 (한국 표준시)
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=hellocat  # 데이터베이스 이름 설정
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - host
-
-networks:
-  host:
-    driver: bridge
-
-volumes:
-  db-data:
-    driver: local
+      - TZ=Asia/Seoul
+      - SPRING_DATASOURCE_URL=${MYSQL_URL}
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
