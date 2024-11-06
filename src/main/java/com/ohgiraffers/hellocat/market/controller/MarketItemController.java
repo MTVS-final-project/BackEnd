@@ -50,7 +50,7 @@ public class MarketItemController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "마켓 아이템 조회 성공, 아이템이 없는 경우 빈 리스트 반환")
     })
-    public ResponseEntity<?> findMarketItemList() {
+    public ResponseEntity<List<MarketItemResponseDto>> findMarketItemList() {
 
         List<MarketItemResponseDto> marketItemList = marketItemService.findMarketItemList();
 
