@@ -50,4 +50,20 @@ public class NoticeAdminController {
             return ResponseEntity.status(NOT_FOUND).build();
         }
     }
+
+    @DeleteMapping("/{noticeId}")
+    @Operation(summary = "공지 삭제", description = "관리자가 공지를 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "공지가 정상적으로 삭제되었습니다."),
+            @ApiResponse(responseCode = "404", description = "공지를 찾을 수 없습니다.")
+    })
+    public ResponseEntity<?> deleteNotice(@PathVariable Long noticeId) {
+
+        try {
+            noticeService.deleteNotice(noticeId);
+            return ResponseEntity.status(NO_CONTENT).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
+    }
 }

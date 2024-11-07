@@ -68,4 +68,15 @@ public class NoticeService {
 
         return new NoticeResponseDto(updatedNotice);
     }
+
+    public void deleteNotice(Long noticeId) {
+
+        Notice foundNotice = noticeRepository.findById(noticeId)
+                .orElseThrow(() -> {
+                    log.error("공지를 찾을 수 없습니다. noticeId: {}", noticeId);
+                    return new IllegalArgumentException("공지를 찾을 수 없습니다.");
+                });
+
+        noticeRepository.delete(foundNotice);
+    }
 }
