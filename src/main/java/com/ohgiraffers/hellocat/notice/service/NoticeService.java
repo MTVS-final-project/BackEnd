@@ -29,4 +29,16 @@ public class NoticeService {
                 .map(NoticeResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public NoticeResponseDto findNoticeById(Long id) {
+
+        Notice notice = noticeRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("공지를 찾을 수 없습니다. noticeId: {}", id);
+                    return new IllegalArgumentException("공지를 찾을 수 없습니다.");
+                });
+
+        return new NoticeResponseDto(notice);
+    }
 }
