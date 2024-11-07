@@ -55,4 +55,17 @@ public class NoticeService {
 
         return new NoticeResponseDto(savedNotice);
     }
+
+    public NoticeResponseDto updateNotice(Long noticeId, NoticeRequestDto requestDto) {
+
+        Notice foundNotice = noticeRepository.findById(noticeId)
+                .orElseThrow(() -> {
+                    log.error("공지를 찾을 수 없습니다. noticeId: {}", noticeId);
+                    return new IllegalArgumentException("공지를 찾을 수 없습니다.");
+                });
+
+        Notice updatedNotice = foundNotice.update(requestDto);
+
+        return new NoticeResponseDto(updatedNotice);
+    }
 }

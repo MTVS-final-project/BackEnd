@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.notice.entity;
 
+import com.ohgiraffers.hellocat.notice.dto.NoticeRequestDto;
 import com.ohgiraffers.hellocat.notice.enums.NoticeCategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -32,5 +33,12 @@ public class Notice {
         this.title = title;
         this.content = content;
         this.category = category;
+    }
+
+    public Notice update(NoticeRequestDto requestDto) {
+        title = requestDto.getTitle();
+        content = requestDto.getContent();
+        category = requestDto.getCategory();
+        return this;
     }
 }
