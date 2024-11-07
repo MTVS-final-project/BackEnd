@@ -3,11 +3,13 @@ package com.ohgiraffers.hellocat.quest.dto;
 import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserQuestRequestDto {
 
     @NotNull(message = "생성 유저 ID는 필수입니다.")
