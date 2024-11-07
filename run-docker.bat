@@ -1,27 +1,31 @@
 @echo off
+setlocal
 
-REM 1. 자바 파일 빌드 (Gradle Wrapper 사용)
-echo Building Java application...
-call gradlew.bat build
+rem 1. gradlew에 실행 권한 부여
+echo Granting execute permission to gradlew...
+icacls gradlew /grant Everyone:F || (echo Failed to give execute permission to gradlew! & exit /b 1)
 
-REM 2. 기존 컨테이너 및 네트워크 종료 및 정리
+rem 2. 자바 파일 빌드 (Gradle Wrapper 사용, 테스트 건너뜀)
+echo Building Java application without tests...
+call gradlew.bat build -x test || (echo Java build failed! & exit /b 1)
+
+rem 3. 기존 컨테이너 및 네트워크 종료 및 정리
 echo Stopping and removing existing containers...
-docker-compose down
+docker-compose down || (echo Failed to stop containers! & exit /b 1)
 
-REM 3. 오래된 이미지 삭제 (옵션)
+rem 4. 오래된 이미지 삭제 (옵션)
 echo Removing old images...
-for /f "tokens=*" %%i in ('docker images -q my-java-app') do (
-    docker rmi -f %%i
+for /f %%i in ('docker images -q my-java-app') do (
+    docker rmi -f %%i || (echo Failed to remove old images! & exit /b 1)
 )
 
-REM 4. 빌드 및 실행
+rem 5. 빌드 및 실행
 echo Building and starting containers...
-docker-compose up -d --build
+docker-compose up -d --build || (echo Failed to build and start containers! & exit /b 1)
 
-REM 5. 컨테이너 상태 확인
+rem 6. 컨테이너 상태 확인
 echo Checking container status...
-docker-compose ps
+docker-compose ps || (echo Failed to check container status! & exit /b 1)
 
-REM 6. 컨테이너 로그 출력
-echo Tailing logs...
-docker-compose logs -f
+echo Deployment successful!
+exit /b 0

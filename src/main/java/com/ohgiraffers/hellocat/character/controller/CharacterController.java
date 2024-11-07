@@ -9,13 +9,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "캐릭터 API", description = "유저의 캐릭터 관련 API")
+@Slf4j
 @RestController
-@RequestMapping("/api/character")
+@RequestMapping("/api/v1/character")
 @RequiredArgsConstructor
 public class CharacterController {
 
