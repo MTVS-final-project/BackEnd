@@ -4,6 +4,7 @@ import com.ohgiraffers.hellocat.notice.enums.NoticeCategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,11 @@ public class Notice {
     @NotNull(message = "카테고리는 필수입니다.")
     @Enumerated(EnumType.STRING)
     private NoticeCategory category;
+
+    @Builder
+    public Notice(String title, String content, NoticeCategory category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+    }
 }

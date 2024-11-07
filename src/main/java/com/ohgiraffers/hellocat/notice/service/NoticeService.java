@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.notice.service;
 
+import com.ohgiraffers.hellocat.notice.dto.NoticeRequestDto;
 import com.ohgiraffers.hellocat.notice.dto.NoticeResponseDto;
 import com.ohgiraffers.hellocat.notice.entity.Notice;
 import com.ohgiraffers.hellocat.notice.repository.NoticeRepository;
@@ -40,5 +41,18 @@ public class NoticeService {
                 });
 
         return new NoticeResponseDto(notice);
+    }
+
+    public NoticeResponseDto createNotice(NoticeRequestDto requestDto) {
+
+        Notice notice = Notice.builder()
+                .title(requestDto.getTitle())
+                .content(requestDto.getContent())
+                .category(requestDto.getCategory())
+                .build();
+
+        Notice savedNotice = noticeRepository.save(notice);
+
+        return new NoticeResponseDto(savedNotice);
     }
 }
