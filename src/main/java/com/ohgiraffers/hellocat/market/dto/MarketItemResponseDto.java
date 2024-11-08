@@ -14,6 +14,9 @@ public class MarketItemResponseDto {
     @NotNull(message = "아이템 아이디는 필수입니다.")
     private Long id;
 
+    @NotNull(message = "제작자 아이디는 필수입니다.")
+    private Long makerId;
+
     @NotBlank(message = "아이템 이름은 필수입니다.")
     private String name;
 
@@ -29,6 +32,7 @@ public class MarketItemResponseDto {
     @Builder
     public MarketItemResponseDto(MarketItem marketItem) {
         this.id = marketItem.getId();
+        this.makerId = marketItem.getMakerId();
         this.name = marketItem.getName();
         this.description = marketItem.getDescription();
         this.price = marketItem.getPrice();
