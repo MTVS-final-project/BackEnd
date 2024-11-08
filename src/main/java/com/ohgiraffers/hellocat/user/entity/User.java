@@ -30,4 +30,12 @@ public class User {
         this.character = character;
         this.coin = 0L;
     }
+
+    public void addCoin(Long price) {
+        this.coin += price;
+    }
+
+    public void removeCoin(Long price) {
+        this.coin -= price;
+    }
 }
