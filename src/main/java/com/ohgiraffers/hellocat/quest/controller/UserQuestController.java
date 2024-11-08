@@ -29,7 +29,6 @@ public class UserQuestController {
     @Operation(summary = "유저 생성 퀘스트 조회", description = "유저가 생성한 퀘스트를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "유저 퀘스트 조회 성공, 퀘스트가 없는 경우 빈 리스트 반환"),
-            @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<List<UserQuestResponseDto>> findUserQuestList() {
 

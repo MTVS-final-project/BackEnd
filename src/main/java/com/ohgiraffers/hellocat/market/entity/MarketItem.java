@@ -2,9 +2,7 @@ package com.ohgiraffers.hellocat.market.entity;
 
 import com.ohgiraffers.hellocat.market.dto.MarketItemRequestDto;
 import com.ohgiraffers.hellocat.market.enums.MarketItemCategory;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -32,6 +30,7 @@ public class MarketItem {
     private Long price;
 
     @NotNull(message = "아이템 카테고리는 필수입니다.")
+    @Enumerated(EnumType.STRING)
     private MarketItemCategory category;
 
     public MarketItem(MarketItemRequestDto requestDto) {

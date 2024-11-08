@@ -3,11 +3,13 @@ package com.ohgiraffers.hellocat.market.dto;
 import com.ohgiraffers.hellocat.market.enums.MarketItemCategory;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class MarketItemRequestDto {
 
     @NotBlank(message = "아이템 이름은 필수입니다.")

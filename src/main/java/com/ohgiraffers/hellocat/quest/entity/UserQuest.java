@@ -37,6 +37,7 @@ public class UserQuest {
 
     // Todo: 수행중인 상태도 표시 해야하나?
     @NotNull(message = "퀘스트 수행 여부는 필수입니다.")
+    @Enumerated(EnumType.STRING)
     private QuestStatus questStatus;
 
     @Builder

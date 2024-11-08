@@ -2,6 +2,7 @@ package com.ohgiraffers.hellocat.user.entity;
 
 import com.ohgiraffers.hellocat.character.entity.Character;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +23,11 @@ public class User {
     @JoinColumn(name = "user_character_id")
     private Character character;
 
+    @NotNull(message = "코인은 필수입니다.")
+    private Long coin;
+
     public void makeCharacter(Character character) {
         this.character = character;
+        this.coin = 0L;
     }
 }
