@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MarketItemRequestDto {
 
+    @NotNull(message = "제작자 아이디는 필수입니다.")
+    private Long makerId;
+
     @NotBlank(message = "아이템 이름은 필수입니다.")
     private String name;
 
