@@ -20,6 +20,9 @@ public class MarketItem {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @NotNull(message = "제작자 아이디는 필수입니다.")
+    private Long makerId;
+
     @NotBlank(message = "아이템 이름은 필수입니다.")
     private String name;
 
@@ -34,6 +37,7 @@ public class MarketItem {
     private MarketItemCategory category;
 
     public MarketItem(MarketItemRequestDto requestDto) {
+        this.makerId = requestDto.getMakerId();
         this.name = requestDto.getName();
         this.description = requestDto.getDescription();
         this.price = requestDto.getPrice();
