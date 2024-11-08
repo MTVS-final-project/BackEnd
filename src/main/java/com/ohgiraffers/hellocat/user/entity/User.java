@@ -36,6 +36,8 @@ public class User {
     }
 
     public void removeCoin(Long price) {
-        this.coin -= price;
+        if (this.coin >= price) {
+            this.coin -= price;
+        }
     }
 }
