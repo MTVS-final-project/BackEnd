@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.*;
 
-@Tag(name = "공지/이벤트 API", description = "공지 및 이벤트 관련 API")
+@Tag(name = "관리자 공지/이벤트 API", description = "관리자 공지 및 이벤트 관련 API")
 @Slf4j
 @RestController
 @RequestMapping("/admin/api/v1/notice")
