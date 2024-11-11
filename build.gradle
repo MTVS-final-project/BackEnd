@@ -41,7 +41,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-logging'
 
     // MongoDB
-    implementation 'org.springframework.boot:spring-boot-starter-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
