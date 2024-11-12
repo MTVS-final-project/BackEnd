@@ -6,9 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static jakarta.persistence.CascadeType.*;
-import static jakarta.persistence.FetchType.*;
-
 @Entity
 @Getter
 @NoArgsConstructor
