@@ -33,8 +33,10 @@ public class User {
     }
 
     public void removeCoin(Long price) {
-        if (this.coin >= price) {
-            this.coin -= price;
+        
+        if (this.coin < price) {
+            throw new IllegalArgumentException("코인이 부족합니다.");
         }
+        this.coin -= price;
     }
 }
