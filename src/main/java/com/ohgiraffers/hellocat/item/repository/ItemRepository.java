@@ -1,4 +1,4 @@
-package com.ohgiraffers.hellocat.market.repository;
+package com.ohgiraffers.hellocat.item.repository;
 
 import com.ohgiraffers.hellocat.item.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
