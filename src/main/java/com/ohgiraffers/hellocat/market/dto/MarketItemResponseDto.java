@@ -29,7 +29,6 @@ public class MarketItemResponseDto {
     @NotNull(message = "아이템 카테고리는 필수입니다.")
     private MarketItemCategory category;
 
-    @Builder
     public MarketItemResponseDto(MarketItem marketItem) {
         this.id = marketItem.getId();
         this.makerId = marketItem.getMakerId();
