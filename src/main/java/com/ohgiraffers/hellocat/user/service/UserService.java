@@ -30,11 +30,8 @@ public class UserService {
 
     public UserCreateResponseDto createUser(User user) {
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        return UserCreateResponseDto.builder()
-                .id(user.getId())
-                .character(user.getCharacter())
-                .build();
+        return new UserCreateResponseDto(savedUser);
     }
 }
