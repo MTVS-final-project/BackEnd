@@ -6,11 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-import static jakarta.persistence.CascadeType.*;
-import static jakarta.persistence.FetchType.*;
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -28,13 +23,9 @@ public class User {
     @NotNull(message = "코인은 필수입니다.")
     private Long coin;
 
-    @NotNull(message = "생성 시간은 필수입니다.")
-    private LocalDateTime registrationDate;
-
     public void makeCharacter(Character character) {
         this.character = character;
-        this.coin = 0L;
-        this.registrationDate = LocalDateTime.now();
+        this.coin = 100L;
     }
 
     public void addCoin(Long price) {
@@ -42,8 +33,10 @@ public class User {
     }
 
     public void removeCoin(Long price) {
-        if (this.coin >= price) {
-            this.coin -= price;
+        
+        if (this.coin < price) {
+            throw new IllegalArgumentException("코인이 부족합니다.");
         }
+        this.coin -= price;
     }
 }
