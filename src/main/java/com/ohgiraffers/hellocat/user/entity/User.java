@@ -25,7 +25,7 @@ public class User {
 
     public void makeCharacter(Character character) {
         this.character = character;
-        this.coin = 0L;
+        this.coin = 100L;
     }
 
     public void addCoin(Long price) {
