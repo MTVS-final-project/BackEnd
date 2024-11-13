@@ -6,9 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static jakarta.persistence.CascadeType.*;
-import static jakarta.persistence.FetchType.*;
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -28,7 +25,7 @@ public class User {
 
     public void makeCharacter(Character character) {
         this.character = character;
-        this.coin = 0L;
+        this.coin = 100L;
     }
 
     public void addCoin(Long price) {
@@ -36,8 +33,10 @@ public class User {
     }
 
     public void removeCoin(Long price) {
-        if (this.coin >= price) {
-            this.coin -= price;
+        
+        if (this.coin < price) {
+            throw new IllegalArgumentException("코인이 부족합니다.");
         }
+        this.coin -= price;
     }
 }
