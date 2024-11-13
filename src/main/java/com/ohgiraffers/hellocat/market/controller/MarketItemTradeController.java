@@ -31,10 +31,11 @@ public class MarketItemTradeController {
             @ApiResponse(responseCode = "404", description = "아이템을 찾을 수 없습니다.")
     })
     public ResponseEntity<?> tradeMarketItem(
-            @PathVariable Long itemId) {
+            @PathVariable Long itemId,
+            @RequestParam Long userId) {
 
         try {
-            marketItemService.tradeMarketItem(itemId);
+            marketItemService.tradeMarketItem(itemId, userId);
             return ResponseEntity.status(OK).body(null);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();

@@ -1,5 +1,7 @@
 package com.ohgiraffers.hellocat.market.service;
 
+import com.ohgiraffers.hellocat.item.repository.ItemRepository;
+import com.ohgiraffers.hellocat.item.service.ItemService;
 import com.ohgiraffers.hellocat.market.dto.MarketItemRequestDto;
 import com.ohgiraffers.hellocat.market.dto.MarketItemResponseDto;
 import com.ohgiraffers.hellocat.market.dto.MarketItemTradeResponseDto;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MarketItemService {
 
+    private final ItemService itemService;
     private final MarketItemRepository marketItemRepository;
     private final UserRepository userRepository;
 
@@ -66,7 +69,7 @@ public class MarketItemService {
         marketItemRepository.delete(foundItem);
     }
 
-    public MarketItemTradeResponseDto tradeMarketItem(Long itemId) {
+    public MarketItemTradeResponseDto tradeMarketItem(Long itemId, Long userId) {
 
         MarketItem foundItem = marketItemRepository.findById(itemId)
                 .orElseThrow(() -> {
@@ -74,14 +77,27 @@ public class MarketItemService {
                     return new IllegalArgumentException("아이템을 찾을 수 없습니다.");
                 });
 
+        User buyer = userRepository.findById(userId)
+                .orElseThrow(() -> {
+                    log.error("유저를 찾을 수 없습니다. userId={}", userId);
+                    return new IllegalArgumentException("유저를 찾을 수 없습니다.");
+                });
+
         Long makerId = foundItem.getMakerId();
-        Long foundItemPrice = foundItem.getPrice();
+        Long buyerId = buyer.getId();
+
+        if (buyerId.equals(makerId)) {
+            throw new IllegalArgumentException("본인의 아이템은 구매할 수 없습니다.");
+        }
 
         User maker = userRepository.findById(makerId)
                 .orElse(null);
-        
-        // Todo: 구매 유저 코인 감소 로직, 아이템 추가 로직
-        // buyer.removeCoin(foundItemPrice);
+
+        Long foundItemPrice = foundItem.getPrice();
+        buyer.removeCoin(foundItemPrice);
+
+        // Todo: 아이템 추가 로직
+        itemService.buyItem(foundItem, buyer);
 
         // 판매 유저 코인 추가 로직
         if (maker != null) {
