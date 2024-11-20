@@ -3,7 +3,6 @@ package com.ohgiraffers.hellocat.quest.service;
 import com.ohgiraffers.hellocat.quest.dto.UserQuestRequestDto;
 import com.ohgiraffers.hellocat.quest.dto.UserQuestResponseDto;
 import com.ohgiraffers.hellocat.quest.entity.UserQuest;
-import com.ohgiraffers.hellocat.quest.enums.QuestStatus;
 import com.ohgiraffers.hellocat.quest.repository.UserQuestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
