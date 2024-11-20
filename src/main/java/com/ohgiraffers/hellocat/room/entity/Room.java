@@ -8,7 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "room")
+import java.util.ArrayList;
+import java.util.List;
+
+@Document(collection = "room")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +23,10 @@ public class Room {
     @NotNull(message = "제작자 아이디는 필수입니다.")
     private Long makerId;
 
-    public Room(RoomRequestDto requestDto) {
+    private List<Furniture> furnitureList = new ArrayList<>();
+
+    public Room(RoomRequestDto requestDto, List<Furniture> furnitureList) {
         this.makerId = requestDto.getMakerId();
+        this.furnitureList = furnitureList;
     }
 }
