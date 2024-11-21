@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,10 +17,12 @@ public class RoomResponseDto {
     private String id;
     private Long makerId;
     private List<Furniture> furnitureList;
+    private LocalDateTime createdAt;
 
     public RoomResponseDto(Room room) {
         this.id = room.getId();
         this.makerId = room.getMakerId();
         this.furnitureList = room.getFurnitureList();
+        this.createdAt = room.getCreatedAt();
     }
 }
