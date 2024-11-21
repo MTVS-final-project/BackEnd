@@ -32,4 +32,12 @@ public class RoomService {
 
         return new RoomResponseDto(room);
     }
+
+    public RoomResponseDto findRoomById(String id) {
+
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 룸 ID 입니다."));
+
+        return new RoomResponseDto(room);
+    }
 }
