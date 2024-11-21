@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,11 @@ public class Room {
 
     private List<Furniture> furnitureList = new ArrayList<>();
 
+    private LocalDateTime createdAt;
+
     public Room(RoomRequestDto requestDto, List<Furniture> furnitureList) {
         this.makerId = requestDto.getMakerId();
         this.furnitureList = furnitureList;
+        this.createdAt = LocalDateTime.now();
     }
 }
