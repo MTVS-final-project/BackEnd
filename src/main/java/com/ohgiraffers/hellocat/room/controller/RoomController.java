@@ -34,13 +34,13 @@ public class RoomController {
         return ResponseEntity.status(201).body(responseDto);
     }
 
-    @GetMapping("/{roomId}")
+    @GetMapping
     @Operation(summary = "아이디 기반 룸 조회", description = "룸의 ID를 기반으로 룸을 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "룸 조회 성공"),
             @ApiResponse(responseCode = "404", description = "룸을 찾을 수 없습니다.")
     })
-    public ResponseEntity<RoomResponseDto> findRoomById(@PathVariable String roomId) {
+    public ResponseEntity<RoomResponseDto> findRoomById(@RequestParam String roomId) {
 
         try {
             RoomResponseDto responseDto = roomService.findRoomById(roomId);
@@ -48,6 +48,5 @@ public class RoomController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
         }
-
     }
 }
