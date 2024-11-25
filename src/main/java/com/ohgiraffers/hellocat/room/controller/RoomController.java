@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.*;
 
 @Tag(name = "룸 API", description = "룸 저장 관련 API")
@@ -34,13 +36,13 @@ public class RoomController {
         return ResponseEntity.status(201).body(responseDto);
     }
 
-    @GetMapping("/{roomId}")
+    @GetMapping
     @Operation(summary = "아이디 기반 룸 조회", description = "룸의 ID를 기반으로 룸을 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "룸 조회 성공"),
             @ApiResponse(responseCode = "404", description = "룸을 찾을 수 없습니다.")
     })
-    public ResponseEntity<RoomResponseDto> findRoomById(@PathVariable String roomId) {
+    public ResponseEntity<RoomResponseDto> findRoomById(@RequestParam String roomId) {
 
         try {
             RoomResponseDto responseDto = roomService.findRoomById(roomId);
@@ -48,6 +50,21 @@ public class RoomController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
         }
+    }
 
+    @GetMapping("/{makerId}")
+    @Operation(summary = "제작자 기반 룸 전체 조회", description = "해당 아이디를 가진 유저의 룸을 모두 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "룸 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "유저를 찾을 수 없습니다.")
+    })
+    public ResponseEntity<List<RoomResponseDto>> findRoomByMakerId(@PathVariable Long makerId) {
+
+        try {
+            List<RoomResponseDto> responseDtoList = roomService.findRoomByMakerId(makerId);
+            return ResponseEntity.status(OK).body(responseDtoList);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
     }
 }
