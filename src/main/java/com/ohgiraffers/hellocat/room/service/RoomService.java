@@ -8,10 +8,9 @@ import com.ohgiraffers.hellocat.room.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,5 +38,11 @@ public class RoomService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 룸 ID 입니다."));
 
         return new RoomResponseDto(room);
+    }
+
+    public List<RoomResponseDto> findRoomByMakerId(Long makerId) {
+        return roomRepository.findAllByMakerId(makerId).stream()
+                .map(RoomResponseDto::new)
+                .toList();
     }
 }
