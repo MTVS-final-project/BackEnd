@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.market.controller;
 
+import com.ohgiraffers.hellocat.market.dto.MarketItemTradeResponseDto;
 import com.ohgiraffers.hellocat.market.service.MarketItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,13 +31,13 @@ public class MarketItemTradeController {
             @ApiResponse(responseCode = "200", description = "거래 성공"),
             @ApiResponse(responseCode = "404", description = "아이템을 찾을 수 없습니다.")
     })
-    public ResponseEntity<?> tradeMarketItem(
+    public ResponseEntity<MarketItemTradeResponseDto> tradeMarketItem(
             @PathVariable Long itemId,
             @RequestParam Long userId) {
 
         try {
-            marketItemService.tradeMarketItem(itemId, userId);
-            return ResponseEntity.status(OK).body(null);
+            MarketItemTradeResponseDto responseDto = marketItemService.tradeMarketItem(itemId, userId);
+            return ResponseEntity.status(OK).body(responseDto);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
         }
