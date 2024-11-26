@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.*;
 
 @Tag(name = "마켓 룸 거래 API", description = "마켓의 룸 거래 관련 API")
@@ -30,7 +32,7 @@ public class MarketRoomController {
             @ApiResponse(responseCode = "201", description = "마켓 아이템 생성 성공"),
             @ApiResponse(responseCode = "404", description = "룸을 찾을 수 없습니다.")
     })
-    private ResponseEntity<MarketRoomResponseDto> createMarketRoom(@RequestParam String roomId,
+    public ResponseEntity<MarketRoomResponseDto> createMarketRoom(@RequestParam String roomId,
                                                                    @RequestParam Long price) {
 
         try {
@@ -39,6 +41,17 @@ public class MarketRoomController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
         }
+    }
 
+    @GetMapping
+    @Operation(summary = "마켓 룸 조회", description = "마켓의 모든 룸을 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "마켓 아이템 조회 성공, 아이템이 없는 경우 빈 리스트 반환")
+    })
+    public ResponseEntity<List<MarketRoomResponseDto>> findMarketRoomList() {
+
+        List<MarketRoomResponseDto> marketRoomList = marketRoomService.findMarketRoomList();
+
+        return ResponseEntity.status(OK).body(marketRoomList);
     }
 }

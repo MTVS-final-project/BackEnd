@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @Transactional
@@ -31,5 +33,13 @@ public class MarketRoomService {
         MarketRoom savedMarketRoom = marketRoomRepository.save(new MarketRoom(requestDto));
 
         return new MarketRoomResponseDto(savedMarketRoom);
+    }
+
+    public List<MarketRoomResponseDto> findMarketRoomList() {
+
+        return marketRoomRepository.findAll()
+                .stream()
+                .map(MarketRoomResponseDto::new)
+                .toList();
     }
 }
