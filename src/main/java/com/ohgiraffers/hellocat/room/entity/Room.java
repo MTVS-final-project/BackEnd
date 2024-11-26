@@ -30,7 +30,7 @@ public class Room {
     private LocalDateTime createdAt;
 
     public Room(RoomRequestDto requestDto, List<Furniture> furnitureList) {
-        this.ownerId = requestDto.getMakerId();
+        this.ownerId = requestDto.getOwnerId();
         this.furnitureList = furnitureList;
         this.createdAt = LocalDateTime.now();
     }

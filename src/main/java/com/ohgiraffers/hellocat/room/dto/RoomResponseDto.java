@@ -15,13 +15,13 @@ import java.util.List;
 public class RoomResponseDto {
 
     private String id;
-    private Long makerId;
+    private Long ownerId;
     private List<Furniture> furnitureList;
     private LocalDateTime createdAt;
 
     public RoomResponseDto(Room room) {
         this.id = room.getId();
-        this.makerId = room.getMakerId();
+        this.ownerId = room.getOwnerId();
         this.furnitureList = room.getFurnitureList();
         this.createdAt = room.getCreatedAt();
     }

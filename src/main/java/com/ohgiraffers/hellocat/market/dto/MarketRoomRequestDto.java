@@ -20,7 +20,7 @@ public class MarketRoomRequestDto {
     private List<Furniture> furnitureList;
 
     public MarketRoomRequestDto(RoomResponseDto room, Long price) {
-        this.makerId = room.getMakerId();
+        this.makerId = room.getOwnerId();
         this.price = price;
         this.furnitureList = room.getFurnitureList();
     }
