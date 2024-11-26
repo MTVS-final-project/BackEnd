@@ -27,12 +27,16 @@ public class MarketRoom {
     @NotNull(message = "제작자 아이디는 필수입니다.")
     private Long makerId;
 
+    @NotNull(message = "가격은 필수입니다.")
+    private Long price;
+
     private List<Furniture> furnitureList = new ArrayList<>();
 
     private LocalDateTime uploadedAt;
 
     public MarketRoom(MarketRoomRequestDto requestDto) {
         this.makerId = requestDto.getMakerId();
+        this.price = requestDto.getPrice();
         this.furnitureList = requestDto.getFurnitureList();
         this.uploadedAt = LocalDateTime.now();
     }
