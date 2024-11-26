@@ -42,4 +42,15 @@ public class MarketRoomService {
                 .map(MarketRoomResponseDto::new)
                 .toList();
     }
+
+    public void deleteMarketRoom(String marketRoomId) {
+
+        MarketRoom foundMarketRoom = marketRoomRepository.findById(marketRoomId)
+                .orElseThrow(() -> {
+                    log.error("룸을 찾을 수 없습니다. marketRoomId={}", marketRoomId);
+                    return new IllegalArgumentException("룸을 찾을 수 없습니다.");
+                });
+
+        marketRoomRepository.delete(foundMarketRoom);
+    }
 }

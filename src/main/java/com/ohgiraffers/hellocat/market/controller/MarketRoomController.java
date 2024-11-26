@@ -33,7 +33,7 @@ public class MarketRoomController {
             @ApiResponse(responseCode = "404", description = "룸을 찾을 수 없습니다.")
     })
     public ResponseEntity<MarketRoomResponseDto> createMarketRoom(@RequestParam String roomId,
-                                                                   @RequestParam Long price) {
+                                                                  @RequestParam Long price) {
 
         try {
             MarketRoomResponseDto createdMarketRoom = marketRoomService.createMarketRoom(roomId, price);
@@ -53,5 +53,21 @@ public class MarketRoomController {
         List<MarketRoomResponseDto> marketRoomList = marketRoomService.findMarketRoomList();
 
         return ResponseEntity.status(OK).body(marketRoomList);
+    }
+
+    @DeleteMapping("/{marketRoomId}")
+    @Operation(summary = "마켓 룸 삭제", description = "마켓 룸을 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "룸이 정상 삭제되었습니다."),
+            @ApiResponse(responseCode = "404", description = "룸을 찾을 수 없습니다.")
+    })
+    public ResponseEntity<Void> deleteMarketRoom(@PathVariable String marketRoomId) {
+
+        try {
+            marketRoomService.deleteMarketRoom(marketRoomId);
+            return ResponseEntity.status(NO_CONTENT).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
     }
 }
