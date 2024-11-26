@@ -40,8 +40,8 @@ public class RoomService {
         return new RoomResponseDto(room);
     }
 
-    public List<RoomResponseDto> findRoomByMakerId(Long makerId) {
-        return roomRepository.findAllByMakerId(makerId).stream()
+    public List<RoomResponseDto> findRoomByMakerId(Long ownerId) {
+        return roomRepository.findAllByOwnerId(ownerId).stream()
                 .map(RoomResponseDto::new)
                 .toList();
     }

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface RoomRepository extends MongoRepository<Room, String> {
 
-    List<Room> findAllByMakerId(Long makerId);
+    List<Room> findAllByOwnerId(Long ownerId);
 }
