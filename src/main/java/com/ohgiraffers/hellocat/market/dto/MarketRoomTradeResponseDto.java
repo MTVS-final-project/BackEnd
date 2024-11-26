@@ -1,25 +1,21 @@
-package com.ohgiraffers.hellocat.room.dto;
+package com.ohgiraffers.hellocat.market.dto;
 
 import com.ohgiraffers.hellocat.room.entity.Furniture;
 import com.ohgiraffers.hellocat.room.entity.Room;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class RoomResponseDto {
+public class MarketRoomTradeResponseDto {
 
     private String id;
     private Long ownerId;
     private List<Furniture> furnitureList;
     private LocalDateTime createdAt;
 
-    public RoomResponseDto(Room room) {
+    public MarketRoomTradeResponseDto(Room room) {
         this.id = room.getId();
         this.ownerId = room.getOwnerId();
         this.furnitureList = room.getFurnitureList();

@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,16 +51,16 @@ public class RoomController {
         }
     }
 
-    @GetMapping("/{makerId}")
+    @GetMapping("/{ownerId}")
     @Operation(summary = "제작자 기반 룸 전체 조회", description = "해당 아이디를 가진 유저의 룸을 모두 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "룸 조회 성공"),
             @ApiResponse(responseCode = "404", description = "유저를 찾을 수 없습니다.")
     })
-    public ResponseEntity<List<RoomResponseDto>> findRoomByMakerId(@PathVariable Long makerId) {
+    public ResponseEntity<List<RoomResponseDto>> findRoomByMakerId(@PathVariable Long ownerId) {
 
         try {
-            List<RoomResponseDto> responseDtoList = roomService.findRoomByMakerId(makerId);
+            List<RoomResponseDto> responseDtoList = roomService.findRoomByMakerId(ownerId);
             return ResponseEntity.status(OK).body(responseDtoList);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
