@@ -92,13 +92,13 @@ public class MarketRoomService {
         buyer.removeCoin(foundMarketRoomPrice);
 
         Room newRoom = new Room(foundMarketRoom, buyerId);
-        roomRepository.save(newRoom);
+        Room savedRoom = roomRepository.save(newRoom);
 
         // 판매자 코인 추가
         if (maker != null) {
             maker.addCoin(foundMarketRoomPrice);
         }
 
-        return null;
+        return new MarketRoomTradeResponseDto(savedRoom);
     }
 }
