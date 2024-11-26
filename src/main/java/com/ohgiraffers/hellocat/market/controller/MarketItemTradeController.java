@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.*;
 @Tag(name = "마켓 아이템 거래 API", description = "마켓의 아이템 거래 관련 API")
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/market/trade")
+@RequestMapping("/api/v1/market/trade/item")
 @RequiredArgsConstructor
 public class MarketItemTradeController {
 
