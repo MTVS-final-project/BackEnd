@@ -1,5 +1,6 @@
 package com.ohgiraffers.hellocat.room.entity;
 
+import com.ohgiraffers.hellocat.market.entity.MarketRoom;
 import com.ohgiraffers.hellocat.room.dto.RoomRequestDto;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
@@ -22,15 +23,21 @@ public class Room {
     private String id;
 
     @NotNull(message = "제작자 아이디는 필수입니다.")
-    private Long makerId;
+    private Long ownerId;
 
     private List<Furniture> furnitureList = new ArrayList<>();
 
     private LocalDateTime createdAt;
 
     public Room(RoomRequestDto requestDto, List<Furniture> furnitureList) {
-        this.makerId = requestDto.getMakerId();
+        this.ownerId = requestDto.getMakerId();
         this.furnitureList = furnitureList;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Room(MarketRoom marketRoom, Long ownerId) {
+        this.ownerId = ownerId;
+        this.furnitureList = marketRoom.getFurnitureList();
         this.createdAt = LocalDateTime.now();
     }
 }
