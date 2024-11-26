@@ -22,7 +22,7 @@ import java.util.List;
 public class MarketRoom {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotNull(message = "제작자 아이디는 필수입니다.")
     private Long makerId;

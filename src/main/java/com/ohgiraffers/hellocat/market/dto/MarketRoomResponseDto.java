@@ -16,7 +16,7 @@ import java.util.List;
 public class MarketRoomResponseDto {
 
     @NotNull(message = "방 아이디는 필수입니다.")
-    private Long id;
+    private String id;
 
     @NotNull(message = "제작자 아이디는 필수입니다.")
     private Long makerId;
