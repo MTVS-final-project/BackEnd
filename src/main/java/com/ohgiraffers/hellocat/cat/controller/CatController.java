@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,10 +40,10 @@ public class CatController {
             @ApiResponse(responseCode = "200", description = "고양이 조회 성공"),
             @ApiResponse(responseCode = "404", description = "고양이를 찾을 수 없습니다.")
     })
-    public ResponseEntity<CatResponseDto> findCatByOwnerId(@RequestParam Long id) {
+    public ResponseEntity<CatResponseDto> findCatByOwnerId(@RequestParam Long ownerId) {
 
         try {
-            CatResponseDto responseDto = catService.findCatByOwnerId(id);
+            CatResponseDto responseDto = catService.findCatByOwnerId(ownerId);
             return ResponseEntity.status(OK).body(responseDto);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(NOT_FOUND).build();
