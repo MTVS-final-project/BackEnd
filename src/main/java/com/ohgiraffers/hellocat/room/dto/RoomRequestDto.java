@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class RoomRequestDto {
 
-    @JsonProperty("makerId")
     @NotNull(message = "제작자 아이디는 필수입니다.")
     private Long ownerId;
     private List<FurnitureRequestDto> furnitureList;
