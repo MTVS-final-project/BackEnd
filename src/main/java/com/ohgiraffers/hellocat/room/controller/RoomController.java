@@ -32,7 +32,24 @@ public class RoomController {
 
         RoomResponseDto responseDto = roomService.saveRoom(requestDto);
 
-        return ResponseEntity.status(201).body(responseDto);
+        return ResponseEntity.status(CREATED).body(responseDto);
+    }
+
+    @PutMapping("/{roomId}")
+    @Operation(summary = "마켓 룸 수정", description = "마켓 룸을 수정합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "룸이 정상 수정되었습니다."),
+            @ApiResponse(responseCode = "404", description = "룸을 찾을 수 없습니다.")
+    })
+    public ResponseEntity<RoomResponseDto> updateRoom(@RequestBody RoomRequestDto requestDto,
+                                                      @PathVariable String roomId) {
+
+        try {
+            RoomResponseDto responseDto = roomService.updateRoom(requestDto, roomId);
+            return ResponseEntity.status(OK).body(responseDto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(NOT_FOUND).build();
+        }
     }
 
     @GetMapping

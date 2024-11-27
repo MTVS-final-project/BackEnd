@@ -40,4 +40,10 @@ public class Room {
         this.furnitureList = marketRoom.getFurnitureList();
         this.createdAt = LocalDateTime.now();
     }
+
+    public Room update(RoomRequestDto requestDto, List<Furniture> furnitureList) {
+        this.ownerId = requestDto.getOwnerId();
+        this.furnitureList = furnitureList;
+        return this;
+    }
 }
