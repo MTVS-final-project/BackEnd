@@ -1,6 +1,5 @@
 package com.ohgiraffers.hellocat.room.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
