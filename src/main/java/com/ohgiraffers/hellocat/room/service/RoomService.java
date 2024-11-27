@@ -45,4 +45,20 @@ public class RoomService {
                 .map(RoomResponseDto::new)
                 .toList();
     }
+
+    public RoomResponseDto updateRoom(RoomRequestDto requestDto, String roomId) {
+
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 룸 ID 입니다."));
+
+        List<Furniture> furnitureList = requestDto.getFurnitureList().stream()
+                .map(Furniture::new)
+                .toList();
+
+        Room updatedRoom = room.update(requestDto, furnitureList);
+
+        roomRepository.save(updatedRoom);
+
+        return new RoomResponseDto(updatedRoom);
+    }
 }
