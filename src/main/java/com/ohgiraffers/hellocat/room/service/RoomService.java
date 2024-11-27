@@ -57,6 +57,8 @@ public class RoomService {
 
         Room updatedRoom = room.update(requestDto, furnitureList);
 
+        roomRepository.save(updatedRoom);
+
         return new RoomResponseDto(updatedRoom);
     }
 }
